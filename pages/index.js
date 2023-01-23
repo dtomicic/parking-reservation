@@ -3,6 +3,7 @@ import { supabase } from "../supabase";
 import InputBox from "../components/InputBox/InputBox";
 import styles from "./Home.module.css";
 import Router from "next/router";
+import Menu from "../components/Menu/Menu";
 
 export default function Home() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -33,6 +34,7 @@ export default function Home() {
       {loggedIn ? (
         <div className={styles.container}>
           <h2 className={styles.header}>Parking App</h2>
+          <Menu />
         </div>
       ) : (
         <div className={styles.container}>
