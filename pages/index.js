@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { supabase } from "../supabase";
 import InputBox from "../components/InputBox/InputBox";
 import styles from "./Home.module.css";
-import Router from "next/router";
 import Menu from "../components/Menu/Menu";
 
 export default function Home() {
@@ -20,10 +19,7 @@ export default function Home() {
     }
   };
 
-  const logout = async () => {
-    const { data } = await supabase.auth.signOut();
-    Router.reload();
-  };
+  console.log(loggedIn)
 
   useEffect(() => {
     getSession();
