@@ -2,6 +2,7 @@ import styles from "./InputBox.module.css";
 import { useState } from "react";
 import { supabase } from "../../supabase";
 import Router from "next/router";
+import Link from "next/link";
 
 const InputBox = (props) => {
   const [email, setEmail] = useState("");
@@ -115,14 +116,14 @@ const InputBox = (props) => {
           <h3 className={styles.cta}>
             Already have an account?{" "}
             <span className={styles.bolded}>
-              <a href="/">Login</a>
+              <Link href="/">Login</Link>
             </span>
           </h3>
         ) : (
           <h3 className={styles.cta}>
             Don't have an account?{" "}
             <span className={styles.bolded}>
-              <a href="/register">Register</a>
+              <Link href="/register">Register</Link>
             </span>
           </h3>
         )}
