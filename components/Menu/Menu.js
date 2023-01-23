@@ -10,6 +10,7 @@ const Menu = () => {
     setToggleModal(!toggleModal);
   }
 
+
   return (
     <>
       <Modal toggleModal={toggleModal} setToggleModal={setToggleModal} type={'logout'} />

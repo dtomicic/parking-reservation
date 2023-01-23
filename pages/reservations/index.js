@@ -3,6 +3,7 @@ import { supabase } from "../../supabase";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Modal from "../../components/Modal/Modal";
+import { useRouter } from "next/router";
 
 const index = () => {
   const [userId, setUserId] = useState(null);
@@ -20,7 +21,6 @@ const index = () => {
       data: { user },
     } = await supabase.auth.getUser();
     setUserId(user.id);
-    console.log(userId);
   };
 
   const getReservations = async () => {
@@ -36,8 +36,6 @@ const index = () => {
     }
   };
 
-  console.log(resId);
-
   useEffect(() => {
     getUserId();
   }, []);
@@ -48,7 +46,11 @@ const index = () => {
 
   return (
     <>
-      <Modal toggleModal={toggleModal} setToggleModal={setToggleModal} resId={resId} />
+      <Modal
+        toggleModal={toggleModal}
+        setToggleModal={setToggleModal}
+        resId={resId}
+      />
       <div className={styles.container}>
         <div className={styles.heading}>
           <h2 className={styles.header}>Your reservations</h2>
@@ -65,7 +67,10 @@ const index = () => {
                 <h3 className={styles.reservationHeader}>
                   {reservation.datum}
                 </h3>
-                <button className={styles.cancelBtn} onClick={() => handleClick(reservation.id)}>
+                <button
+                  className={styles.cancelBtn}
+                  onClick={() => handleClick(reservation.id)}
+                >
                   Cancel
                 </button>
               </div>
