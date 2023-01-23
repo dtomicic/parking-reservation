@@ -1,0 +1,105 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto';
+    max-width: 375px;
+}
+
+.heading {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.header {
+    font-size: 22px;
+    text-transform: uppercase;
+}
+
+.errorText {
+    display: none;
+    color: red;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.errorDisplay {
+    display: block;
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 70%;
+    align-items: center;
+}
+
+.formItem {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.formItemLabel {
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+    font-weight: 500;
+}
+
+.formItemInput {
+    border: none;
+    border-bottom: 1px solid #D9D9D9;
+    height: 25px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.formItemInput:focus {
+    outline: none;
+    border-bottom: 1px solid #1B2E5A;
+}
+
+.formItemInput::placeholder {
+    font-size: 14px;
+}
+
+.cta {
+    font-weight: 500;
+    font-size: 14px;
+    opacity: 0.5;
+    margin-top: -10px;
+}
+
+.bolded {
+    font-weight: 700;
+}
+
+.submitButton {
+    width: 100%;
+    border: none;
+    background-color: #1B2E5A;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 9px 0;
+    border-radius: 5px;
+    transition: ease-in-out .3s;
+}
+
+.submitButton:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.errorBorder {
+    border-bottom: 1px solid red;
+}

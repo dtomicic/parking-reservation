@@ -1,12 +1,12 @@
+import InputBox from "../../components/inputBox/inputBox";
+import styles from "../Home.module.css";
 import { useEffect, useState } from "react";
-import { supabase } from "../supabase";
-import InputBox from "../components/InputBox/InputBox";
-import styles from "./Home.module.css";
-import Router from "next/router";
+import { supabase } from "../../supabase";
+import { useRouter } from "next/router";
 
-export default function Home() {
+const index = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-
+  const Router = useRouter();
   const getSession = async () => {
     const { data, error } = await supabase.auth.getSession();
     if (error) {
@@ -19,29 +19,21 @@ export default function Home() {
     }
   };
 
-  const logout = async () => {
-    const { data } = await supabase.auth.signOut();
-    Router.reload();
-  };
-
   useEffect(() => {
     getSession();
-  }, []);
-
+    if (loggedIn) {
+      Router.push("/");
+    }
+  }, [loggedIn]);
   return (
     <>
-      {loggedIn ? (
-        <div className={styles.container}>
-          <h2 className={styles.header}>Parking App</h2>
-        </div>
-      ) : (
         <div className={styles.container}>
           <h2 className={styles.header}>Parking App</h2>
           <div className={styles.loginContainer}>
-            <InputBox type={"login"} />
+            <InputBox type={"register"} />
           </div>
         </div>
-      )}
     </>
   );
-}
+};
+export default index;
