@@ -1,19 +1,27 @@
 import styles from "./Menu.module.css";
 import Link from "next/link";
 import Modal from "../Modal/Modal";
-import { useState } from "react";
+import React, { useState } from "react";
+import { UserContext } from "../../pages/_app";
 
 const Menu = () => {
   const [toggleModal, setToggleModal] = useState(false);
   
+  const value = React.useContext(UserContext);
+
+
   const handleClick = () => {
     setToggleModal(!toggleModal);
-  }
+  };
 
 
   return (
     <>
-      <Modal toggleModal={toggleModal} setToggleModal={setToggleModal} type={'logout'} />
+      <Modal
+        toggleModal={toggleModal}
+        setToggleModal={setToggleModal}
+        type={"logout"}
+      />
       <div className={styles.container}>
         <Link href="/reserve" className={styles.link}>
           <div className={styles.menuItem}>
@@ -25,7 +33,10 @@ const Menu = () => {
             <h3 className={styles.menuItemHeader}>Your reservations</h3>
           </div>
         </Link>
-        <div className={`${styles.menuItem} ${styles.menuItemLogout}`}  onClick={handleClick}>
+        <div
+          className={`${styles.menuItem} ${styles.menuItemLogout}`}
+          onClick={handleClick}
+        >
           <h3 className={styles.menuItemHeader}>Logout</h3>
         </div>
       </div>

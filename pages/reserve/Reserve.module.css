@@ -68,3 +68,12 @@
 .reserveBtn:hover {
     cursor: pointer;
 }
+
+.disabled {
+    background-color: #D9D9D9;
+    color: white;
+}
+
+.disabled:hover {
+    cursor: not-allowed;
+}

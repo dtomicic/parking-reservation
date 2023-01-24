@@ -1,15 +1,18 @@
 import styles from "./Reservations.module.css";
 import { supabase } from "../../supabase";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Link from "next/link";
 import Modal from "../../components/Modal/Modal";
 import { useRouter } from "next/router";
+import { UserContext } from "../_app";
 
 const index = () => {
   const [userId, setUserId] = useState(null);
   const [reservations, setReservations] = useState([]);
   const [toggleModal, setToggleModal] = useState(false);
   const [resId, setResId] = useState(null);
+  const router = useRouter();
+  const value = useContext(UserContext);
 
   const handleClick = (x) => {
     setToggleModal(!toggleModal);
@@ -37,8 +40,12 @@ const index = () => {
   };
 
   useEffect(() => {
-    getUserId();
-  }, []);
+    if (value === null) {
+      router.push("/");
+    } else {
+      getUserId();
+    }
+  }, [value]);
 
   useEffect(() => {
     getReservations();
