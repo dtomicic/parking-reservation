@@ -19,8 +19,6 @@ export default function Home() {
     }
   };
 
-  console.log(loggedIn)
-
   useEffect(() => {
     getSession();
   }, []);

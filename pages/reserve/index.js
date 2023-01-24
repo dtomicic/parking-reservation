@@ -1,18 +1,19 @@
 import styles from "./Reserve.module.css";
 import { supabase } from "../../supabase";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Link from "next/link";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/router";
+import { UserContext } from "../_app";
 
 const index = () => {
   const [userId, setUserId] = useState(null);
   const [startDate, setStartDate] = useState(new Date());
   const [availableSpots, setAvailableSpots] = useState(10);
   const [takenSpots, setTakenSpots] = useState(0);
-
   const router = useRouter();
+  const value = useContext(UserContext);
 
   const normalDate =
     startDate.getMonth() +
@@ -21,6 +22,13 @@ const index = () => {
     startDate.getDate() +
     "-" +
     startDate.getFullYear();
+
+  const reserveSpot = async () => {
+    const { data, error } = await supabase
+      .from("rezervacije")
+      .insert({ datum: startDate, id_korisnika: userId });
+    router.push("/");
+  };
 
   const getUserId = async () => {
     const {
@@ -37,17 +45,14 @@ const index = () => {
     setTakenSpots(data.length);
   };
 
-  const reserveSpot = async () => {
-    const { data, error } = await supabase
-      .from("rezervacije")
-      .insert({ datum: startDate, id_korisnika: userId });
-    router.push("/");
-  };
-
   useEffect(() => {
-    getUserId();
-    getRowCount();
-  }, [normalDate]);
+    if (value === null) {
+      router.push('/');
+    } else {
+      getUserId();
+      getRowCount();
+    }
+  }, [value]);
 
   return (
     <div className={styles.container}>
@@ -66,7 +71,14 @@ const index = () => {
           onChange={(date) => setStartDate(date)}
           className={styles.datePicker}
         />
-        <button className={styles.reserveBtn} onClick={reserveSpot}>
+        <button
+          className={
+            availableSpots - takenSpots === 0
+              ? `${styles.reserveBtn} ${styles.disabled}`
+              : `${styles.reserveBtn}`
+          }
+          onClick={reserveSpot}
+        >
           Reserve
         </button>
       </div>

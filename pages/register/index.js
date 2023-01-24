@@ -3,9 +3,12 @@ import styles from "../Home.module.css";
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabase";
 import { useRouter } from "next/router";
+import { UserContext } from "../_app";
 
 const index = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+
+
   const Router = useRouter();
   const getSession = async () => {
     const { data, error } = await supabase.auth.getSession();
@@ -27,12 +30,12 @@ const index = () => {
   }, [loggedIn]);
   return (
     <>
-        <div className={styles.container}>
-          <h2 className={styles.header}>Parking App</h2>
-          <div className={styles.loginContainer}>
-            <InputBox type={"register"} />
-          </div>
+      <div className={styles.container}>
+        <h2 className={styles.header}>Parking App</h2>
+        <div className={styles.loginContainer}>
+          <InputBox type={"register"} />
         </div>
+      </div>
     </>
   );
 };
