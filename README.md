@@ -1,7 +1,7 @@
 <h1 align="center">
   Parking Reservation
   <br>
-  (Frontend Mentor Project)
+  (Personal project)
 </h1>
 <br>
 
